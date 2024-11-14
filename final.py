@@ -8,34 +8,6 @@ from sklearn.model_selection import train_test_split
 from PIL import Image
 import streamlit as st
 import tempfile
-
-
-# Load and preprocess images
-IMG_SIZE = (224, 224)  # Resize images to 224x224 pixels
-data_dir = "C:/Users/rgbha/OneDrive/Desktop/Seasons"
-categories = sorted(os.listdir(data_dir))  # Assumes each folder is a category (season)
-
-images = []
-labels = []
-
-for category in categories:
-    path = os.path.join(data_dir, category)
-    class_num = categories.index(category)
-    for img in os.listdir(path):
-        try:
-            img_array = cv2.imread(os.path.join(path, img))
-            img_array = cv2.resize(img_array, IMG_SIZE)
-            images.append(img_array)
-            labels.append(class_num)
-        except Exception as e:
-            print(f"Error loading image {img}: {e}")
-
-images = np.array(images) / 255.0  # Normalize pixel values
-labels = np.array(labels)
-
-# Train-test split
-X_train, X_test, y_train, y_test = train_test_split(images, labels, test_size=0.2, random_state=42)
-
 from sklearn.cluster import KMeans
 import cv2
 import numpy as np
